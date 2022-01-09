@@ -1,4 +1,4 @@
-public class Variable{
+public class Variable {
     public static void main(String[] args) {
         byte cores = 8;
         short threads = 16;

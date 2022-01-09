@@ -10,6 +10,7 @@ public class Calculator {
         System.out.println("Введите символ математические операции (+, -, *, /, ^, %): ");
         char charOperation = scanner.next().charAt(0);
         int result=0;
+        
         if (charOperation == '+') {
             result = firstNumber + secondNumber;
         } else if (charOperation == '-') {
