@@ -4,40 +4,40 @@ public class ConditionalStatement {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Введите возраст:");
+        System.out.println("Р’РІРµРґРёС‚Рµ РІРѕР·СЂР°СЃС‚: ");
         int age = scanner.nextInt();
         if (age > 20) {
-            System.out.println("Вам больше 20 лет");
+            System.out.println("Р’Р°Рј Р±РѕР»СЊС€Рµ 20 Р»РµС‚");
         }
         System.out.println();
 
-        System.out.println("Введите рост:");
+        System.out.println("Р’РІРµРґРёС‚Рµ СЂРѕСЃС‚:");
         double height = scanner.nextDouble();
         if (height < 180) {
-            System.out.println("Ваш рост меньше 1.80 метра");
+            System.out.println("Р’Р°С€ СЂРѕСЃС‚ РјРµРЅСЊС€Рµ 1.80 РјРµС‚СЂР°");
         } else {
-            System.out.println("Ваш рост больше 1.80 метра");
+            System.out.println("Р’Р°С€ СЂРѕСЃС‚ Р±РѕР»СЊС€Рµ 1.80 РјРµС‚СЂР°");
         }
         System.out.println();
 
-        System.out.println("Введите первую букву вашего имени:");
+        System.out.println("Р’РІРµРґРёС‚Рµ РїРµСЂРІСѓСЋ Р±СѓРєРІСѓ РІР°С€РµРіРѕ РёРјРµРЅРё:");
         char firstLetterName = scanner.next().charAt(0);
         if (firstLetterName == 'M') {
-            System.out.println("Ваше имя начинается на М");
+            System.out.println("Р’Р°С€Рµ РёРјСЏ РЅР°С‡РёРЅР°РµС‚СЃСЏ РЅР° Рњ");
         } else if (firstLetterName == 'I') {
-            System.out.println("Ваше имя начинается на I");
+            System.out.println("Р’Р°С€Рµ РёРјСЏ РЅР°С‡РёРЅР°РµС‚СЃСЏ РЅР° I");
         } else {
-            System.out.println("Ваше имя начинается не на М и I");
+            System.out.println("Р’Р°С€Рµ РёРјСЏ РЅР°С‡РёРЅР°РµС‚СЃСЏ РЅРµ РЅР° Рњ Рё I");
         }
         System.out.println();
 
-        System.out.println("Введите ваш пол (male или female):");
+        System.out.println("Р’РІРµРґРёС‚Рµ РІР°С€ РїРѕР» (male РёР»Рё female):");
         char gender = scanner.next().charAt(0);
         if (gender == 'm') {
-            System.out.println("Вы мужчина");
+            System.out.println("Р’С‹ РјСѓР¶С‡РёРЅР°");
         }
         if (gender == 'f') {
-            System.out.println("Вы женщина");
+            System.out.println("Р’С‹ Р¶РµРЅС‰РёРЅР°");
         }
     }
 }
