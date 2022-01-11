@@ -3,7 +3,7 @@ public class Calculator {
     char mathSign;
     int secondNumber;
 
-    public int calculation(int firstNumber, char mathSign, int secondNumber) {
+    public void calculation(int firstNumber, char mathSign, int secondNumber) {
         int result = 0;
         switch (mathSign) {
             case ('+'):
@@ -26,7 +26,9 @@ public class Calculator {
             case ('%'):
                 result = firstNumber % secondNumber;
                 break;
+            default:
+                System.out.println("Такой оператор не найден");
         }
-        return result;
+        System.out.println("Результат вычисления " + result);
     }
 }
