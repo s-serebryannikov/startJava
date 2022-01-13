@@ -4,25 +4,21 @@ public class CalculatorTest {
     public static void main(String[] args) {
         Calculator calc = new Calculator();
         Scanner scanner = new Scanner(System.in);
-        char answer;
-        for (; ; ) {
+        String answer;
+        do {
+            System.out.println("Введите первое число: ");
+            calc.setFirstNumber(scanner.nextInt());
+            System.out.println("Введите символ математические операции (+, -, *, /, ^, %): ");
+            calc.setMathSign(scanner.next().charAt(0));
+            System.out.println("Введите второе число: ");
+            calc.setSecondNumber(scanner.nextInt());
+
+            calc.calculate(calc.getFirstNumber(), calc.getMathSign(), calc.getSecondNumber());
             do {
-
-                System.out.println("Введите первое число: ");
-                calc.firstNumber = scanner.nextInt();
-                System.out.println("Введите символ математические операции (+, -, *, /, ^, %): ");
-                calc.mathSign = scanner.next().charAt(0);
-                System.out.println("Введите второе число: ");
-                calc.secondNumber = scanner.nextInt();
-
-                calc.calculation(calc.firstNumber, calc.mathSign, calc.secondNumber);
-                do {
-                    System.out.println("Хотите продолжить вычисления? [yes/no]:");
-                    answer = scanner.next().charAt(0);
-                } while (answer != 'n' & answer != 'y');
-            } while (answer != 'n');
-            if (answer == 'n') break;
-
-        }
+                System.out.println("Хотите продолжить вычисления? [yes/no]:");
+                answer = scanner.next();
+            } while (!answer.equals("yes") & !answer.equals("no"));
+            if (answer.equals("no")) break;
+        } while (true);
     }
 }
