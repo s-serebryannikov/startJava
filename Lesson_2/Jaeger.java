@@ -7,6 +7,16 @@ public class Jaeger {
     private int speed;
     private int armor;
 
+    Jaeger(String modelName, String mark, String origin, float height, float weight, int speed, int armor) {
+        this.modelName = modelName;
+        this.mark = mark;
+        this.origin = origin;
+        this.height = height;
+        this.weight = weight;
+        this.speed = speed;
+        this.armor = armor;
+    }
+
     public String getModelName() {
         return modelName;
     }
@@ -63,11 +73,11 @@ public class Jaeger {
         this.armor = armor;
     }
 
-    void startNuclearReactor() {
+    void runNuclearReactor() {
         System.out.println("Start nuclear reactor");
     }
 
-    void weaponsInspection() {
+    void checkWeapons() {
         System.out.println("Weapons inspection");
     }
 
