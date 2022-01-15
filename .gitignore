@@ -10,3 +10,6 @@ Wolf.class
 CalculatorTest.class
 Jaeger.class
 JaegerTest.class
+GuessNumberTest.class
+GuessNumber.class
+Player.class
