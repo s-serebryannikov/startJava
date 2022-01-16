@@ -14,6 +14,7 @@ public class GuessNumber {
         Random random = new Random();
         int number;
         int hiddenNum = random.nextInt(100) + 1;
+        
         do {
             System.out.println("Игрок " + p1.getName() + " попробуйте угадать число: ");
             number = scanner.nextInt();
