@@ -5,6 +5,7 @@ public class CalculatorTest {
         Calculator calc = new Calculator();
         Scanner scanner = new Scanner(System.in);
         String answer;
+        
         do {
             System.out.println("Введите первое число: ");
             calc.setFirstNumber(scanner.nextInt());
