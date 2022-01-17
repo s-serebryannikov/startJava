@@ -1,15 +1,1 @@
-Calculator.class
-ConditionalStatement.class
-Cycle.class
-GuessNumber.class
-Variable.class
-Unicode.class
-Person.class
-WolfTest.class
-Wolf.class
-CalculatorTest.class
-Jaeger.class
-JaegerTest.class
-GuessNumberTest.class
-GuessNumber.class
-Player.class
+out/
