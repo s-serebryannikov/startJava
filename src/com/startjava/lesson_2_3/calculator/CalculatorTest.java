@@ -2,6 +2,8 @@ package com.startjava.lesson_2_3.calculator;
 
 import java.util.Scanner;
 
+import static java.lang.Integer.parseInt;
+
 public class CalculatorTest {
     public static void main(String[] args) {
         Calculator calc = new Calculator();
@@ -9,18 +11,19 @@ public class CalculatorTest {
         String answer;
 
         do {
-            System.out.println("Введите первое число: ");
-            calc.setFirstNumber(scanner.nextInt());
-            System.out.println("Введите символ математические операции (+, -, *, /, ^, %): ");
-            calc.setMathSign(scanner.next().charAt(0));
-            System.out.println("Введите второе число: ");
-            calc.setSecondNumber(scanner.nextInt());
+            System.out.println("Введите математическое выражение: ");
+            String[] str = scanner.nextLine().split(" ");
 
-            calc.calculate();
+            calc.setFirstNumber(parseInt(str[0]));
+            calc.setMathSign(str[1].charAt(0));
+            calc.setSecondNumber(parseInt(str[2]));
+
+            System.out.println("Результат " + calc.calculate());
             do {
                 System.out.println("Хотите продолжить вычисления? [yes/no]:");
-                answer = scanner.next();
+                answer = scanner.nextLine();
             } while (!answer.equals("yes") & !answer.equals("no"));
         } while (!answer.equals("no"));
+
     }
 }

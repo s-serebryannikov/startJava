@@ -1,6 +1,10 @@
 package com.startjava.lesson_2_3.calculator;
 
+
+import static java.lang.Integer.parseInt;
+
 public class Calculator {
+
     private int firstNumber;
     private char mathSign;
     private int secondNumber;
@@ -13,14 +17,6 @@ public class Calculator {
         this.firstNumber = firstNumber;
     }
 
-    public char getMathSign() {
-        return mathSign;
-    }
-
-    public void setMathSign(char mathSign) {
-        this.mathSign = mathSign;
-    }
-
     public int getSecondNumber() {
         return secondNumber;
     }
@@ -29,11 +25,19 @@ public class Calculator {
         this.secondNumber = secondNumber;
     }
 
-    public void calculate() {
+    public char getMathSign() {
+        return mathSign;
+    }
+
+    public void setMathSign(char mathSign) {
+        this.mathSign = mathSign;
+    }
+
+    public int calculate() {
         int result = 0;
         switch (mathSign) {
             case '+':
-                result = firstNumber + secondNumber;
+                result = Math.addExact(firstNumber,secondNumber);
                 break;
             case '-':
                 result = firstNumber - secondNumber;
@@ -45,16 +49,14 @@ public class Calculator {
                 result = firstNumber / secondNumber;
                 break;
             case '^':
-                result = 1;
-                for (int i = 1; i <= secondNumber; i++) {
-                    result *= firstNumber;
-                }
+                result = (int) Math.pow(firstNumber, secondNumber);
+                break;
             case '%':
                 result = firstNumber % secondNumber;
                 break;
             default:
                 System.out.println("Такой оператор не найден");
         }
-        System.out.println("Результат вычисления " + result);
+        return result;
     }
 }
