@@ -1,43 +1,25 @@
-package com.startjava.lesson_2_3.calculator;
-
+package com.startjava.lesson_2_3_4.calculator;
 
 import static java.lang.Integer.parseInt;
 
 public class Calculator {
-
     private int firstNumber;
     private char mathSign;
     private int secondNumber;
+    private String mathExpression;
 
-    public int getFirstNumber() {
-        return firstNumber;
-    }
-
-    public void setFirstNumber(int firstNumber) {
-        this.firstNumber = firstNumber;
-    }
-
-    public int getSecondNumber() {
-        return secondNumber;
-    }
-
-    public void setSecondNumber(int secondNumber) {
-        this.secondNumber = secondNumber;
-    }
-
-    public char getMathSign() {
-        return mathSign;
-    }
-
-    public void setMathSign(char mathSign) {
-        this.mathSign = mathSign;
+    public void setMathExpression(String mathExpression) {
+        this.mathExpression = mathExpression;
     }
 
     public int calculate() {
         int result = 0;
+        firstNumber = parseInt(mathExpression.split(" ")[0]);
+        mathSign = mathExpression.split(" ")[1].charAt(0);
+        secondNumber = parseInt(mathExpression.split(" ")[2]);
         switch (mathSign) {
             case '+':
-                result = Math.addExact(firstNumber,secondNumber);
+                result = Math.addExact(firstNumber, secondNumber);
                 break;
             case '-':
                 result = firstNumber - secondNumber;
