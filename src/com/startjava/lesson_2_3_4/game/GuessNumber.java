@@ -7,53 +7,96 @@ import java.util.Scanner;
 public class GuessNumber {
     private Player p1;
     private Player p2;
+    int playerNumber;
+
+    Scanner scanner = new Scanner(System.in);
 
     public GuessNumber(Player p1, Player p2) {
         this.p1 = p1;
         this.p2 = p2;
     }
 
-    void startGame() {
-        Scanner scanner = new Scanner(System.in);
+    public void start() {
+
         Random random = new Random();
-        int playerNumber;
         int hiddenNum = random.nextInt(100) + 1;
         do {
-            p1.inputVal();
-            p1.Attempts(p1.getPlayerNum());
-
-            if (p1.getPlayerNum() == hiddenNum) {
-                p1.playerWin(p1.getPlayerNum());
-                System.out.println("Значения игрока " + p2.getName() + ": " + Arrays.toString(p2.arrayAttempts()));
-                p1.updateArr();
-                p2.updateArr();
+            playerNumber = enteredVal(p1);
+            Attempts(p1, playerNumber);
+            if (playerNumber == hiddenNum) {
+                playerWin(p1);
+                System.out.println("Значения игрока " + p2.getName() + ": " + Arrays.toString(arrayAttempts(p2)));
+                updateArr(p1);
+                updateArr(p2);
                 break;
-            } else if (p1.getPlayerNum() < hiddenNum && p1.getCount() < 10) {
-                p1.numberLess();
-            } else if (p1.getPlayerNum() > hiddenNum && p1.getCount() < 10) {
-                p1.numberGreater();
+            } else if (playerNumber < hiddenNum && p1.getCount() < 10) {
+                numberLess(p1);
+            } else if (playerNumber > hiddenNum && p1.getCount() < 10) {
+                numberGreater(p1);
             } else {
-                System.out.println("У " + p1.getName() + " закончились попытки");
+                playerLost(p1);
                 break;
             }
 
-            p2.inputVal();
-            p2.Attempts(p2.getPlayerNum());
-            if (p2.getPlayerNum() == hiddenNum) {
-                p2.playerWin(p2.getPlayerNum());
-                System.out.println("Значения игрока " + p1.getName() + ": " + Arrays.toString(p1.arrayAttempts()));
-                p1.updateArr();
-                p2.updateArr();
+            playerNumber = enteredVal(p2);
+            Attempts(p2, playerNumber);
+            if (playerNumber == hiddenNum) {
+                playerWin(p2);
+                System.out.println("Значения игрока " + p1.getName() + ": " + Arrays.toString(arrayAttempts(p1)));
+                updateArr(p1);
+                updateArr(p2);
                 break;
-            } else if (p2.getPlayerNum() < hiddenNum && p2.getCount() < 10) {
-                p2.numberLess();
-            } else if (p2.getPlayerNum() > hiddenNum && p2.getCount() < 10) {
-                p2.numberGreater();
+            } else if (playerNumber < hiddenNum && p2.getCount() < 10) {
+                numberLess(p2);
+            } else if (playerNumber > hiddenNum && p2.getCount() < 10) {
+                numberGreater(p2);
             } else {
-                System.out.println("У " + p2.getName() + " закончились попытки");
+                playerLost(p2);
                 break;
             }
         } while (true);
+    }
+
+    public int enteredVal(Player p) {
+        System.out.println("\nИгрок " + p.getName() + " попробуйте угадать число: ");
+        return scanner.nextInt();
+    }
+
+    public void Attempts(Player p, int pn) {
+        if (p.getCount() < 10) {
+            p.getArrNum()[p.getCount()] = pn;
+            p.setCount(1);
+        } else System.out.println("Попытки закончились");
+    }
+
+    public int[] arrayAttempts(Player p) {
+        return Arrays.copyOf(p.getArrNum(), p.getCount());
+    }
+
+    public void playerWin(Player p) {
+        System.out.println("\nИгрок " + p.getName() + " вы победили!");
+        System.out.println("Игрок " + p.getName() + " угадал число " + playerNumber + " с " + p.getCount() + " попытки\n");
+        System.out.println("Значения игрока " + p.getName() + ": " + Arrays.toString(arrayAttempts(p)));
+    }
+
+    public void playerLost(Player p) {
+        System.out.println("У " + p.getName() + " закончились попытки\n");
+        System.out.println("Значения игрока " + p1.getName() + ": " + Arrays.toString(arrayAttempts(p1)));
+        System.out.println("Значения игрока " + p2.getName() + ": " + Arrays.toString(arrayAttempts(p2)));
+    }
+
+
+    public void updateArr(Player p) {
+        Arrays.fill(p.getArrNum(), 0);
+        p.setCount(0);
+    }
+
+    public void numberLess(Player p) {
+        System.out.println("\nИгрок " + p.getName() + ", данное число меньше того, что загадал компьютер");
+    }
+
+    public void numberGreater(Player p) {
+        System.out.println("\nИгрок " + p.getName() + ", данное число больше того, что загадал компьютер");
     }
 }
 

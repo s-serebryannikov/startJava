@@ -12,8 +12,8 @@ public class GuessNumberTest {
         Player p2 = new Player(scanner.nextLine(), 10);
         System.out.println("У вас по 10 попыток что бы угадать загаданное слово");
         do {
-            GuessNumber gn = new GuessNumber(p1, p2);
-            gn.startGame();
+            GuessNumber game = new GuessNumber(p1, p2);
+            game.start();
 
             do {
                 System.out.println("Хотите продолжить игру? [yes/no]:");
