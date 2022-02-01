@@ -1,18 +1,23 @@
 package com.startjava.lesson_2_3_4.game;
 
+import java.util.Arrays;
 
 public class Player {
     private String name;
-    private int[] arrNum;
-    private int count = 0;
+    private int[] enteredNumbers;
+    private int count;
 
-    Player(String name, int n) {
+    Player(String name, int length) {
         this.name = name;
-        this.arrNum = new int[n];
+        enteredNumbers = new int[length];
     }
 
-    public int[] getArrNum() {
-        return arrNum;
+    public String getName() {
+        return name;
+    }
+
+    public int[] getEnteredNumbers() {
+        return enteredNumbers;
     }
 
     public int getCount() {
@@ -21,11 +26,7 @@ public class Player {
 
     public void setCount(int count) {
         if (count >= 1) {
-            this.count += count;
+            this.count+=count;
         } else this.count = 0;
-    }
-
-    public String getName() {
-        return name;
     }
 }

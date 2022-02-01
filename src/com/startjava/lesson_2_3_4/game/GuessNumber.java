@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class GuessNumber {
     private Player p1;
     private Player p2;
-    int playerNumber;
+    private int playerNumber;
 
     Scanner scanner = new Scanner(System.in);
 
@@ -17,39 +17,40 @@ public class GuessNumber {
     }
 
     public void start() {
-
         Random random = new Random();
         int hiddenNum = random.nextInt(100) + 1;
         do {
-            playerNumber = enteredVal(p1);
-            Attempts(p1, playerNumber);
+            playerNumber = inputNumber(p1);
+            countingAttempts(p1, playerNumber);
             if (playerNumber == hiddenNum) {
                 playerWin(p1);
-                System.out.println("Значения игрока " + p2.getName() + ": " + Arrays.toString(arrayAttempts(p2)));
-                updateArr(p1);
-                updateArr(p2);
+                System.out.print("Значения игрока " + p2.getName() + ": ");
+                outputEnteredValues(p2.getEnteredNumbers(), p2);
+                clearNumbers(p1);
+                clearNumbers(p2);
                 break;
             } else if (playerNumber < hiddenNum && p1.getCount() < 10) {
-                numberLess(p1);
+                System.out.println("\nИгрок " + p1.getName() + ", данное число меньше того, что загадал компьютер");
             } else if (playerNumber > hiddenNum && p1.getCount() < 10) {
-                numberGreater(p1);
+                System.out.println("\nИгрок " + p1.getName() + ", данное число больше того, что загадал компьютер");
             } else {
                 playerLost(p1);
                 break;
             }
 
-            playerNumber = enteredVal(p2);
-            Attempts(p2, playerNumber);
+            playerNumber = inputNumber(p2);
+            countingAttempts(p2, playerNumber);
             if (playerNumber == hiddenNum) {
                 playerWin(p2);
-                System.out.println("Значения игрока " + p1.getName() + ": " + Arrays.toString(arrayAttempts(p1)));
-                updateArr(p1);
-                updateArr(p2);
+                System.out.print("Значения игрока " + p1.getName() + ": ");
+                outputEnteredValues(p1.getEnteredNumbers(), p1);
+                clearNumbers(p1);
+                clearNumbers(p2);
                 break;
             } else if (playerNumber < hiddenNum && p2.getCount() < 10) {
-                numberLess(p2);
+                System.out.println("\nИгрок " + p2.getName() + ", данное число меньше того, что загадал компьютер");
             } else if (playerNumber > hiddenNum && p2.getCount() < 10) {
-                numberGreater(p2);
+                System.out.println("\nИгрок " + p2.getName() + ", данное число больше того, что загадал компьютер");
             } else {
                 playerLost(p2);
                 break;
@@ -57,46 +58,45 @@ public class GuessNumber {
         } while (true);
     }
 
-    public int enteredVal(Player p) {
+    private int inputNumber(Player p) {
         System.out.println("\nИгрок " + p.getName() + " попробуйте угадать число: ");
         return scanner.nextInt();
     }
 
-    public void Attempts(Player p, int pn) {
+    private void countingAttempts(Player p, int playerNumber) {
         if (p.getCount() < 10) {
-            p.getArrNum()[p.getCount()] = pn;
+            p.getEnteredNumbers()[p.getCount()] = playerNumber;
             p.setCount(1);
         } else System.out.println("Попытки закончились");
     }
 
-    public int[] arrayAttempts(Player p) {
-        return Arrays.copyOf(p.getArrNum(), p.getCount());
+    private int[] showEnteredNumbers(Player p) {
+        return Arrays.copyOf(p.getEnteredNumbers(), p.getCount());
     }
 
-    public void playerWin(Player p) {
+    private void playerWin(Player p) {
         System.out.println("\nИгрок " + p.getName() + " вы победили!");
         System.out.println("Игрок " + p.getName() + " угадал число " + playerNumber + " с " + p.getCount() + " попытки\n");
-        System.out.println("Значения игрока " + p.getName() + ": " + Arrays.toString(arrayAttempts(p)));
+        System.out.print("Значения игрока " + p.getName() + ": ");
+        outputEnteredValues(p.getEnteredNumbers(), p);
     }
 
-    public void playerLost(Player p) {
+    private void playerLost(Player p) {
         System.out.println("У " + p.getName() + " закончились попытки\n");
-        System.out.println("Значения игрока " + p1.getName() + ": " + Arrays.toString(arrayAttempts(p1)));
-        System.out.println("Значения игрока " + p2.getName() + ": " + Arrays.toString(arrayAttempts(p2)));
+        System.out.println("Значения игрока " + p1.getName() + ": " + Arrays.toString(showEnteredNumbers(p1)));
+        System.out.println("Значения игрока " + p2.getName() + ": " + Arrays.toString(showEnteredNumbers(p2)));
     }
 
-
-    public void updateArr(Player p) {
-        Arrays.fill(p.getArrNum(), 0);
+    private void clearNumbers(Player p) {
+        Arrays.fill(p.getEnteredNumbers(), 0);
         p.setCount(0);
     }
 
-    public void numberLess(Player p) {
-        System.out.println("\nИгрок " + p.getName() + ", данное число меньше того, что загадал компьютер");
-    }
-
-    public void numberGreater(Player p) {
-        System.out.println("\nИгрок " + p.getName() + ", данное число больше того, что загадал компьютер");
+    public void outputEnteredValues(int[] array, Player p) {
+        for (int num : Arrays.copyOf(array, p.getCount())) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
     }
 }
 
