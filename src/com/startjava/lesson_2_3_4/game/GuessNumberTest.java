@@ -7,9 +7,9 @@ public class GuessNumberTest {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Игрок 1, введите своё имя :");
-        Player p1 = new Player(scanner.nextLine(), 10);
+        Player p1 = new Player(scanner.nextLine());
         System.out.println("Игрок 2, введите своё имя :");
-        Player p2 = new Player(scanner.nextLine(), 10);
+        Player p2 = new Player(scanner.nextLine());
         System.out.println("У вас по 10 попыток что бы угадать загаданное слово");
         String answer;
         do {
