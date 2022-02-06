@@ -11,15 +11,14 @@ public class GuessNumberTest {
         System.out.println("Игрок 2, введите своё имя :");
         Player p2 = new Player(scanner.nextLine());
         System.out.println("У вас по 10 попыток что бы угадать загаданное слово");
-        String answer;
+        String answer = "yes";
         do {
-            GuessNumber game = new GuessNumber(p1, p2);
-            game.start();
-
-            do {
-                System.out.println("Хотите продолжить игру? [yes/no]:");
-                answer = scanner.next();
-            } while (!answer.equals("yes") && !answer.equals("no"));
+            if (answer.equals("yes")) {
+                GuessNumber game = new GuessNumber(p1, p2);
+                game.start();
+            }
+            System.out.println("Хотите продолжить игру? [yes/no]:");
+            answer = scanner.next();
         } while (!answer.equals("no"));
     }
 }

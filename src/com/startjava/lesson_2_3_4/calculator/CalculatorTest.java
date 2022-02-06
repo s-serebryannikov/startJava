@@ -5,17 +5,21 @@ import java.util.Scanner;
 public class CalculatorTest {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String answer;
+        String answer = "yes";
 
-        System.out.println("Введите математическое выражение: ");
-        System.out.println("Результат вычисления " + Calculator.calculate(scanner.nextLine()));
         do {
-            System.out.println("Хотите продолжить вычисления? [yes/no]:");
-            answer = scanner.nextLine();
             if (answer.equals("yes")) {
                 System.out.println("Введите математическое выражение: ");
-                System.out.println("Результат вычисления " + Calculator.calculate(scanner.nextLine()));
+                try {
+                    System.out.println("Результат вычисления " + Calculator.calculate(scanner.nextLine()));
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Допустимый знак математической операции: \"+ - * / ^ %\"");
+                } catch (Exception e) {
+                    System.out.println();
+                }
             }
+            System.out.println("Хотите продолжить вычисления? [yes/no]:");
+            answer = scanner.nextLine();
         } while (!answer.equals("no"));
     }
 }

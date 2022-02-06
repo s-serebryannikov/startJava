@@ -4,49 +4,38 @@ import java.util.Arrays;
 
 public class Player {
     private String name;
-    private int[] enteredNumbers;
+    private int[] enteredNums;
     private int count;
-    private int playerNumber;
 
-    Player(String name) {
+    public Player(String name) {
         this.name = name;
-        enteredNumbers = new int[10];
+        enteredNums = new int[10];
     }
 
-    public int getPlayerNumber() {
-        return playerNumber;
-    }
-
-    public void setPlayerNumber(int playerNumber) {
-        if (playerNumber > 0 && playerNumber <= 100) {
-            this.playerNumber = playerNumber;
+    public void setEnteredNums(int number) {
+        if (number > 0 && number <= 100) {
+            enteredNums[count] = number;
         } else count--;
-    }
-
-    public void setEnteredNumbers(int playerNumber) {
-        enteredNumbers[count] = playerNumber;
     }
 
     public String getName() {
         return name;
     }
 
-    public int[] getEnteredNumbers() {
-        return Arrays.copyOf(enteredNumbers, count);
+    public int[] getEnteredNums() {
+        return Arrays.copyOf(enteredNums, enteredNums.length);
     }
 
     public int getCount() {
         return count;
     }
 
-    public void setCount(int count) {
-        if (count >= 1) {
-            this.count++;
-        } else this.count = 0;
+    public void setCount() {
+        this.count++;
     }
 
     public void clearNumbers() {
-        Arrays.fill(enteredNumbers, 0);
+        Arrays.fill(enteredNums, 0, count, 0);
         count = 0;
     }
 }
