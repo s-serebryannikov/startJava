@@ -17,7 +17,7 @@ public class Calculator {
             case '/' -> firstNumber / secondNumber;
             case '^' -> (int) Math.pow(firstNumber, secondNumber);
             case '%' -> firstNumber % secondNumber;
-            default -> throw new NumberFormatException("Допустимый знак математической операции: \"+ - * / ^ %\"");
+            default -> throw new NumberFormatException();
         };
     }
 }

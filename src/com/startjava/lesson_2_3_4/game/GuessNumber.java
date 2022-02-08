@@ -17,43 +17,37 @@ public class GuessNumber {
     public void start() {
         Random random = new Random();
         hiddenNum = random.nextInt(100) + 1;
-
+        p1.clearNumbers();
+        p2.clearNumbers();
         do {
-            inputNumber(p1);
             if (checkAttempts(p1)) {
                 break;
             }
+            inputNumber(p1);
             if (compareNum(p1)) {
-                p1.clearNumbers();
-                p2.clearNumbers();
                 break;
             }
 
-            inputNumber(p2);
             if (checkAttempts(p2)) {
                 break;
             }
-
+            inputNumber(p2);
             if (compareNum(p2)) {
-                p1.clearNumbers();
-                p2.clearNumbers();
                 break;
             }
         } while (true);
+        showEnteredNumbers(p1);
+        showEnteredNumbers(p2);
     }
 
     private void inputNumber(Player p) {
         System.out.println("\nИгрок " + p.getName() + " попробуйте угадать число: ");
-        p.setEnteredNums(scanner.nextInt());
+        p.setEnteredNum(scanner.nextInt());
     }
 
     private boolean checkAttempts(Player p) {
-        if ((p.getCount() + 1) == 10) {
+        if ((p.getCount()) == 10) {
             System.out.println("У " + p.getName() + " закончились попытки\n");
-            showEnteredNumbers(p1);
-            showEnteredNumbers(p2);
-            p1.clearNumbers();
-            p2.clearNumbers();
             return true;
         }
         return false;
@@ -79,8 +73,6 @@ public class GuessNumber {
             System.out.println("\nИгрок " + p.getName() + " вы победили!");
             System.out.println("Игрок " + p.getName() + " угадал число " + p.getEnteredNums()[p.getCount()] + " с " + (p.getCount() + 1) + " попытки\n");
             p.setCount();
-            showEnteredNumbers(p1);
-            showEnteredNumbers(p2);
             isWin = true;
         }
         p.setCount();

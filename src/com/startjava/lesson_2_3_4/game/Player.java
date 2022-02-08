@@ -12,10 +12,10 @@ public class Player {
         enteredNums = new int[10];
     }
 
-    public void setEnteredNums(int number) {
+    public void setEnteredNum(int number) {
         if (number > 0 && number <= 100) {
             enteredNums[count] = number;
-        } else count--;
+        }
     }
 
     public String getName() {
@@ -23,7 +23,7 @@ public class Player {
     }
 
     public int[] getEnteredNums() {
-        return Arrays.copyOf(enteredNums, enteredNums.length);
+        return Arrays.copyOf(enteredNums, count+1);
     }
 
     public int getCount() {
