@@ -1,8 +1,6 @@
 package com.startjava.lesson_2_3_4.calculator;
 
 public class Calculator {
-    CalculatorTest c = new CalculatorTest();
-
     public static int calculate(String mathExpression) throws Exception {
         String[] mathExp = mathExpression.split(" ");
 
@@ -21,8 +19,3 @@ public class Calculator {
         };
     }
 }
-
-
-
-
-

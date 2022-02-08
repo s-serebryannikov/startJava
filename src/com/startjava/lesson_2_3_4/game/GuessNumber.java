@@ -20,15 +20,11 @@ public class GuessNumber {
         p1.clearNumbers();
         p2.clearNumbers();
         do {
-            if (checkAttempts(p1)) {
+            if (checkAttempts(p1) && checkAttempts(p2)) {
                 break;
             }
             inputNumber(p1);
             if (compareNum(p1)) {
-                break;
-            }
-
-            if (checkAttempts(p2)) {
                 break;
             }
             inputNumber(p2);
@@ -41,15 +37,38 @@ public class GuessNumber {
     }
 
     private void inputNumber(Player p) {
-        System.out.println("\nИгрок " + p.getName() + " попробуйте угадать число: ");
-        p.setEnteredNum(scanner.nextInt());
+        while (true) {
+            System.out.println("\nИгрок " + p.getName() + " попробуйте угадать число: ");
+            int number = scanner.nextInt();
+            if (number > 0 && number <= 100) {
+                p.addNum(number);
+                break;
+            } else System.out.println("Число должно быть в диапазоне (0,100]\nПопробуйте ещё раз");
+        }
+//
     }
 
     private boolean checkAttempts(Player p) {
         if ((p.getCount()) == 10) {
-            System.out.println("У " + p.getName() + " закончились попытки\n");
+            System.out.println("У " + p.getName() + " закончились попытки");
             return true;
         }
+        return false;
+    }
+
+    private boolean compareNum(Player p) {
+        int number = p.getEnteredNums()[p.getCount() - 1];
+        if (number < hiddenNum) {
+            System.out.println("Игрок " + p.getName() + ", данное число меньше того, что загадал компьютер");
+        } else if (number > hiddenNum) {
+            System.out.println("Игрок " + p.getName() + ", данное число больше того, что загадал компьютер");
+        } else {
+            System.out.println("\nИгрок " + p.getName() + " вы победили!");
+            System.out.println("Игрок " + p.getName() + " угадал число " + number + " с " + p.getCount() + " попытки\n");
+            p.setCount();
+            return true;
+        }
+        p.setCount();
         return false;
     }
 
@@ -61,21 +80,5 @@ public class GuessNumber {
             }
         }
         System.out.println();
-    }
-
-    private boolean compareNum(Player p) {
-        boolean isWin = false;
-        if (p.getEnteredNums()[p.getCount()] < hiddenNum) {
-            System.out.println("\nИгрок " + p.getName() + ", данное число меньше того, что загадал компьютер");
-        } else if (p.getEnteredNums()[p.getCount()] > hiddenNum) {
-            System.out.println("\nИгрок " + p.getName() + ", данное число больше того, что загадал компьютер");
-        } else if (p.getEnteredNums()[p.getCount()] == hiddenNum) {
-            System.out.println("\nИгрок " + p.getName() + " вы победили!");
-            System.out.println("Игрок " + p.getName() + " угадал число " + p.getEnteredNums()[p.getCount()] + " с " + (p.getCount() + 1) + " попытки\n");
-            p.setCount();
-            isWin = true;
-        }
-        p.setCount();
-        return isWin;
     }
 }
