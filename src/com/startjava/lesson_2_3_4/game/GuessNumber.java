@@ -20,9 +20,6 @@ public class GuessNumber {
         p1.clearNumbers();
         p2.clearNumbers();
         do {
-            if (checkAttempts(p1) && checkAttempts(p2)) {
-                break;
-            }
             inputNumber(p1);
             if (compareNum(p1)) {
                 break;
@@ -31,7 +28,7 @@ public class GuessNumber {
             if (compareNum(p2)) {
                 break;
             }
-        } while (true);
+        } while (!checkAttempts(p1) && !checkAttempts(p2));
         showEnteredNumbers(p1);
         showEnteredNumbers(p2);
     }
@@ -40,12 +37,10 @@ public class GuessNumber {
         while (true) {
             System.out.println("\nИгрок " + p.getName() + " попробуйте угадать число: ");
             int number = scanner.nextInt();
-            if (number > 0 && number <= 100) {
-                p.addNum(number);
+            if (p.addNum(number)) {
                 break;
-            } else System.out.println("Число должно быть в диапазоне (0,100]\nПопробуйте ещё раз");
+            } else System.out.println("Число " + number + " не входит в диапазон (0,100]\nПопробуйте ещё раз");
         }
-//
     }
 
     private boolean checkAttempts(Player p) {
@@ -58,17 +53,16 @@ public class GuessNumber {
 
     private boolean compareNum(Player p) {
         int number = p.getEnteredNums()[p.getCount() - 1];
+        String name = p.getName();
         if (number < hiddenNum) {
-            System.out.println("Игрок " + p.getName() + ", данное число меньше того, что загадал компьютер");
+            System.out.println("Игрок " + name + ", данное число меньше того, что загадал компьютер");
         } else if (number > hiddenNum) {
-            System.out.println("Игрок " + p.getName() + ", данное число больше того, что загадал компьютер");
+            System.out.println("Игрок " + name + ", данное число больше того, что загадал компьютер");
         } else {
-            System.out.println("\nИгрок " + p.getName() + " вы победили!");
-            System.out.println("Игрок " + p.getName() + " угадал число " + number + " с " + p.getCount() + " попытки\n");
-            p.setCount();
+            System.out.println("\nИгрок " + name + " вы победили!");
+            System.out.println("Игрок " + name + " угадал число " + number + " с " + p.getCount() + " попытки\n");
             return true;
         }
-        p.setCount();
         return false;
     }
 

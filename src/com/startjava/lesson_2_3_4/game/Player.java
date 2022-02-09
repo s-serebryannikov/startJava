@@ -12,9 +12,12 @@ public class Player {
         enteredNums = new int[10];
     }
 
-    public void addNum(int number) {
-        enteredNums[count] = number;
-        count++;
+    public boolean addNum(int number) {
+        if (number > 0 && number <= 100) {
+            enteredNums[count] = number;
+            count++;
+            return true;
+        } else return false;
     }
 
     public String getName() {
@@ -27,10 +30,6 @@ public class Player {
 
     public int getCount() {
         return count;
-    }
-
-    public void setCount() {
-//        count++;
     }
 
     public void clearNumbers() {

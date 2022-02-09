@@ -12,10 +12,8 @@ public class CalculatorTest {
                 System.out.println("Введите математическое выражение: ");
                 try {
                     System.out.println("Результат вычисления " + Calculator.calculate(scanner.nextLine()));
-                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Допустимый знак математической операции: \"+ - * / ^ %\"");
                 } catch (Exception e) {
-                    System.out.println();
+                    System.out.println("Допустимый знак математической операции: \"+ - * / ^ %\"");
                 }
             }
             System.out.println("Хотите продолжить вычисления? [yes/no]:");
