@@ -15,16 +15,13 @@ public class GuessNumber {
     }
 
     public void start() {
-        Random random = new Random();
-        hiddenNum = random.nextInt(100) + 1;
-        p1.clearNumbers();
-        p2.clearNumbers();
+        initGame();
         do {
-            inputNumber(p1);
+            inputNum(p1);
             if (compareNum(p1)) {
                 break;
             }
-            inputNumber(p2);
+            inputNum(p2);
             if (compareNum(p2)) {
                 break;
             }
@@ -33,13 +30,21 @@ public class GuessNumber {
         showEnteredNumbers(p2);
     }
 
-    private void inputNumber(Player p) {
+    private void initGame() {
+        Random random = new Random();
+        hiddenNum = random.nextInt(100) + 1;
+        p1.clearNumbers();
+        p2.clearNumbers();
+    }
+
+    private void inputNum(Player p) {
         while (true) {
             System.out.println("\nИгрок " + p.getName() + " попробуйте угадать число: ");
             int number = scanner.nextInt();
             if (p.addNum(number)) {
                 break;
-            } else System.out.println("Число " + number + " не входит в диапазон (0,100]\nПопробуйте ещё раз");
+            }
+            System.out.println("Число " + number + " не входит в диапазон (0,100]\nПопробуйте ещё раз");
         }
     }
 
@@ -68,9 +73,9 @@ public class GuessNumber {
 
     private void showEnteredNumbers(Player p) {
         System.out.print("Значения игрока " + p.getName() + ": ");
-        for (int number : p.getEnteredNums()) {
-            if (number > 0) {
-                System.out.print(number + " ");
+        for (int num : p.getEnteredNums()) {
+            if (num > 0) {
+                System.out.print(num + " ");
             }
         }
         System.out.println();

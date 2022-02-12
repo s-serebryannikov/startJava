@@ -12,7 +12,7 @@ public class CalculatorTest {
                 System.out.println("Введите математическое выражение: ");
                 try {
                     System.out.println("Результат вычисления " + Calculator.calculate(scanner.nextLine()));
-                } catch (Exception e) {
+                } catch (IllegalArgumentException e) {
                     System.out.println("Допустимый знак математической операции: \"+ - * / ^ %\"");
                 }
             }
