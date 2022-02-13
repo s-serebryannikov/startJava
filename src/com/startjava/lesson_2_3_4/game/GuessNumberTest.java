@@ -4,17 +4,19 @@ import java.util.Scanner;
 
 public class GuessNumberTest {
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner(System.in);
+
+        GuessNumber game = new GuessNumber();
         System.out.println("Игрок 1, введите своё имя :");
-        Player p1 = new Player(scanner.nextLine());
+        game.save(new Player(scanner.nextLine()));
         System.out.println("Игрок 2, введите своё имя :");
-        Player p2 = new Player(scanner.nextLine());
+        game.save(new Player(scanner.nextLine()));
+        System.out.println("Игрок 3, введите своё имя :");
+        game.save(new Player(scanner.nextLine()));
         System.out.println("У вас по 10 попыток что бы угадать загаданное слово");
         String answer = "yes";
         do {
             if (answer.equals("yes")) {
-                GuessNumber game = new GuessNumber(p1, p2);
                 game.start();
             }
             System.out.println("Хотите продолжить игру? [yes/no]:");

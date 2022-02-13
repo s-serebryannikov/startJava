@@ -5,6 +5,25 @@ import java.util.Arrays;
 public class Player {
     private String name;
     private int[] enteredNums;
+    private int lot;
+    private int countWin;
+
+    public int getCountWin() {
+        return countWin;
+    }
+
+    public void setCountWin() {
+        countWin++;
+    }
+
+    public int getLot() {
+        return lot;
+    }
+
+    public void setLot(int lot) {
+        this.lot = lot;
+    }
+
     private int count;
 
     public Player(String name) {
