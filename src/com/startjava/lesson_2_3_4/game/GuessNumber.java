@@ -9,58 +9,52 @@ public class GuessNumber {
 
     private Player[] players = new Player[3];
     private int hiddenNum;
-    private int count;
     Scanner scanner = new Scanner(System.in);
 
+    GuessNumber(Player p1, Player p2, Player p3) {
+        players[0] = p1;
+        players[1] = p2;
+        players[2] = p3;
+    }
 
     public void start() {
         lotPlayers(players);
         while (players[0].getCountWin() != 3 && players[1].getCountWin() != 3 && players[2].getCountWin() != 3) {
             initGame();
             do {
-                inputNum(players[0]);
-                if (compareNum(players[0])) {
-                    break;
-                }
-                inputNum(players[1]);
-                if (compareNum(players[1])) {
-                    break;
-                }
-                inputNum(players[2]);
-                if (compareNum(players[2])) {
+                if (inputNum()) {
                     break;
                 }
             } while (!checkAttempts(players[0]) && !checkAttempts(players[1]) && !checkAttempts(players[2]));
-            for (int i = 0; i < players.length; i++) {
-                showEnteredNumbers(players[i]);
-            }
+            showEnteredNumbers();
+            showResults();
         }
         winnerPlayer(players[0], players[1], players[2]);
-    }
-
-
-    void save(Player p) {
-        players[count] = p;
-        count++;
     }
 
     private void initGame() {
         Random random = new Random();
         hiddenNum = random.nextInt(100) + 1;
-        for (int i = 0; i < players.length; i++) {
-            players[i].clearNumbers();
+        for (Player player : players) {
+            player.clearNumbers();
         }
     }
 
-    private void inputNum(Player p) {
-        while (true) {
-            System.out.println("\nИгрок " + p.getName() + " попробуйте угадать число: ");
-            int number = scanner.nextInt();
-            if (p.addNum(number)) {
-                break;
+    private boolean inputNum() {
+        for (Player player : players) {
+            while (true) {
+                System.out.println("\nИгрок " + player.getName() + " попробуйте угадать число: ");
+                int number = scanner.nextInt();
+                if (player.addNum(number)) {
+                    break;
+                }
+                System.out.println("Число " + number + " не входит в диапазон (0,100]\nПопробуйте ещё раз");
             }
-            System.out.println("Число " + number + " не входит в диапазон (0,100]\nПопробуйте ещё раз");
+            if (compareNum(player)) {
+                return true;
+            }
         }
+        return false;
     }
 
     private boolean checkAttempts(Player p) {
@@ -87,22 +81,24 @@ public class GuessNumber {
         return false;
     }
 
-    private void showEnteredNumbers(Player p) {
-        System.out.print("Значения игрока " + p.getName() + ": ");
-        for (int num : p.getEnteredNums()) {
-            if (num > 0) {
-                System.out.print(num + " ");
+    private void showEnteredNumbers() {
+        for (int i = 0; i < 3; i++) {
+            System.out.print("Значения игрока " + players[i].getName() + ": ");
+            for (int num : players[i].getEnteredNums()) {
+                if (num > 0) {
+                    System.out.print(num + " ");
+                }
             }
+            System.out.println();
         }
-        System.out.println();
     }
 
     private void lotPlayers(Player[] players) {
         Random random = new Random();
-        for (int i = 0; i < players.length; i++) {
-            System.out.println("Игрок " + players[i].getName() + " для участия в жребии нажмите Enter");
+        for (Player player : players) {
+            System.out.println("Игрок " + player.getName() + " для участия в жребии нажмите Enter");
             scanner.nextLine();
-            players[i].setLot(random.nextInt(11) + 1);
+            player.setLot(random.nextInt(11) + 1);
         }
         Arrays.sort(players, new Comparator<Player>() {
             @Override
@@ -110,7 +106,7 @@ public class GuessNumber {
                 return p2.getLot() - p1.getLot();
             }
         });
-        System.out.println("Игроки угадывают в слудующем порядке: ");
+        System.out.println("Игроки угадывают в следующем порядке: ");
         for (Player p : players) {
             System.out.println("Игрок " + p.getName() + " - число жребия " + p.getLot());
         }
@@ -123,5 +119,11 @@ public class GuessNumber {
             System.out.println("\nПобедитель по результатам 3х игр " + p2.getName() + "\n");
         } else
             System.out.println("\nПобедитель по результатам 3х игр " + p3.getName() + "\n");
+    }
+
+    private void showResults() {
+        for (int i = 0; i < players.length; i++) {
+            System.out.println("У игрока " + players[i].getName() + " колличество побед - " + players[i].getCountWin());
+        }
     }
 }
