@@ -7,29 +7,28 @@ import java.util.Scanner;
 
 public class GuessNumber {
 
-    private Player[] players = new Player[3];
+    private Player[] players;
     private int hiddenNum;
     Scanner scanner = new Scanner(System.in);
 
-    GuessNumber(Player p1, Player p2, Player p3) {
-        players[0] = p1;
-        players[1] = p2;
-        players[2] = p3;
+    GuessNumber(Player[] players) {
+        this.players = players;
+        inputName();
     }
 
     public void start() {
-        lotPlayers(players);
-        while (players[0].getCountWin() != 3 && players[1].getCountWin() != 3 && players[2].getCountWin() != 3) {
+        System.out.println("У вас по 10 попыток что бы угадать загаданное слово");
+        castLot(players);
+        while (checkWinnerPlayer()) {
             initGame();
             do {
                 if (inputNum()) {
                     break;
                 }
-            } while (!checkAttempts(players[0]) && !checkAttempts(players[1]) && !checkAttempts(players[2]));
+            } while (!checkAttempts(players[players.length - 1]));
             showEnteredNumbers();
             showResults();
         }
-        winnerPlayer(players[0], players[1], players[2]);
     }
 
     private void initGame() {
@@ -53,16 +52,15 @@ public class GuessNumber {
             if (compareNum(player)) {
                 return true;
             }
+            if (checkAttempts(player)) {
+                System.out.println("У " + player.getName() + " закончились попытки");
+            }
         }
         return false;
     }
 
     private boolean checkAttempts(Player p) {
-        if ((p.getCount()) == 10) {
-            System.out.println("У " + p.getName() + " закончились попытки");
-            return true;
-        }
-        return false;
+        return (p.getCount()) == 4;
     }
 
     private boolean compareNum(Player p) {
@@ -75,7 +73,7 @@ public class GuessNumber {
         } else {
             System.out.println("\nИгрок " + name + " вы победили!");
             System.out.println("Игрок " + name + " угадал число " + number + " с " + p.getCount() + " попытки\n");
-            p.setCountWin();
+            p.setCountWin(1);
             return true;
         }
         return false;
@@ -85,20 +83,20 @@ public class GuessNumber {
         for (int i = 0; i < 3; i++) {
             System.out.print("Значения игрока " + players[i].getName() + ": ");
             for (int num : players[i].getEnteredNums()) {
-                if (num > 0) {
                     System.out.print(num + " ");
-                }
-            }
+           }
             System.out.println();
         }
     }
 
-    private void lotPlayers(Player[] players) {
+    private void castLot(Player[] players) {
         Random random = new Random();
+        scanner.nextLine();
         for (Player player : players) {
             System.out.println("Игрок " + player.getName() + " для участия в жребии нажмите Enter");
             scanner.nextLine();
             player.setLot(random.nextInt(11) + 1);
+            player.setCountWin(0);
         }
         Arrays.sort(players, new Comparator<Player>() {
             @Override
@@ -112,18 +110,26 @@ public class GuessNumber {
         }
     }
 
-    private void winnerPlayer(Player p1, Player p2, Player p3) {
-        if (p1.getCountWin() == 3) {
-            System.out.println("\nПобедитель по результатам 3х игр " + p1.getName() + "\n");
-        } else if (p2.getCountWin() == 3) {
-            System.out.println("\nПобедитель по результатам 3х игр " + p2.getName() + "\n");
-        } else
-            System.out.println("\nПобедитель по результатам 3х игр " + p3.getName() + "\n");
+    private boolean checkWinnerPlayer() {
+        for (Player player : players) {
+            if (player.getCountWin() == 3) {
+                System.out.println("\nПобедитель по результатам 3х игр " + player.getName() + "\n");
+                return false;
+            }
+        }
+        return true;
     }
 
     private void showResults() {
+        for (Player player : players) {
+            System.out.println("У игрока " + player.getName() + " колличество побед - " + player.getCountWin());
+        }
+    }
+
+    private void inputName() {
         for (int i = 0; i < players.length; i++) {
-            System.out.println("У игрока " + players[i].getName() + " колличество побед - " + players[i].getCountWin());
+            System.out.println("Игрок " + (i + 1) + ", введите своё имя :");
+            players[i] = new Player(scanner.nextLine());
         }
     }
 }

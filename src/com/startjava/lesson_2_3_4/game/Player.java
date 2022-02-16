@@ -7,28 +7,15 @@ public class Player {
     private int[] enteredNums;
     private int lot;
     private int countWin;
-
-    public int getCountWin() {
-        return countWin;
-    }
-
-    public void setCountWin() {
-        countWin++;
-    }
-
-    public int getLot() {
-        return lot;
-    }
-
-    public void setLot(int lot) {
-        this.lot = lot;
-    }
-
     private int count;
 
     public Player(String name) {
         this.name = name;
         enteredNums = new int[10];
+    }
+
+    public String getName() {
+        return name;
     }
 
     public boolean addNum(int number) {
@@ -39,12 +26,26 @@ public class Player {
         } else return false;
     }
 
-    public String getName() {
-        return name;
+    public int[] getEnteredNums() {
+        return Arrays.copyOf(enteredNums, count );
     }
 
-    public int[] getEnteredNums() {
-        return Arrays.copyOf(enteredNums, count + 1);
+    public int getLot() {
+        return lot;
+    }
+
+    public void setLot(int lot) {
+        this.lot = lot;
+    }
+
+    public int getCountWin() {
+        return countWin;
+    }
+
+    public void setCountWin(int num) {
+        if(num==1){
+            countWin++;
+        }else countWin = 0;
     }
 
     public int getCount() {
