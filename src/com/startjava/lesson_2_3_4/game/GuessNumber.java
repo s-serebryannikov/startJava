@@ -83,8 +83,8 @@ public class GuessNumber {
         for (int i = 0; i < 3; i++) {
             System.out.print("Значения игрока " + players[i].getName() + ": ");
             for (int num : players[i].getEnteredNums()) {
-                    System.out.print(num + " ");
-           }
+                System.out.print(num + " ");
+            }
             System.out.println();
         }
     }

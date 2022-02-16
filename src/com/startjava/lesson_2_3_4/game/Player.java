@@ -27,7 +27,7 @@ public class Player {
     }
 
     public int[] getEnteredNums() {
-        return Arrays.copyOf(enteredNums, count );
+        return Arrays.copyOf(enteredNums, count);
     }
 
     public int getLot() {
@@ -43,9 +43,9 @@ public class Player {
     }
 
     public void setCountWin(int num) {
-        if(num==1){
+        if (num == 1) {
             countWin++;
-        }else countWin = 0;
+        } else countWin = 0;
     }
 
     public int getCount() {
