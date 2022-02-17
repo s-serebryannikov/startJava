@@ -13,7 +13,6 @@ public class GuessNumber {
 
     GuessNumber(Player[] players) {
         this.players = players;
-        inputName();
     }
 
     public void start() {
@@ -123,13 +122,6 @@ public class GuessNumber {
     private void showResults() {
         for (Player player : players) {
             System.out.println("У игрока " + player.getName() + " колличество побед - " + player.getCountWin());
-        }
-    }
-
-    private void inputName() {
-        for (int i = 0; i < players.length; i++) {
-            System.out.println("Игрок " + (i + 1) + ", введите своё имя :");
-            players[i] = new Player(scanner.nextLine());
         }
     }
 }
