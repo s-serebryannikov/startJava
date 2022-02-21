@@ -59,7 +59,7 @@ public class GuessNumber {
     }
 
     private boolean checkAttempts(Player p) {
-        return (p.getCount()) == 4;
+        return (p.getCount()) == 10;
     }
 
     private boolean compareNum(Player p) {
