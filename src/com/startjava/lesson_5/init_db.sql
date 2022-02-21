@@ -10,11 +10,3 @@ INSERT INTO jaegers (modelName, mark, height, weight, status, origin, launch, ka
 		('Deadly Hurricane', 'Mark-4', '295',    '2010', 'Worker',    'China',     '20180611', '5'),
 		('Nova Hiperion',    'Mark-4', '250',    '1856', 'Worker',    'Mexico',    '20240101', '4'),
         ('Valor Omega',      'Mark-6', '216',    '2350', 'Worker',    'Japan',     '20251114', '10');
-
-
-
-
-
-
-
-
